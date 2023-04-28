@@ -6,7 +6,7 @@ const logger = require("./config/logger");
 const port = process.env.PORT;
 
 mongoose
-	.connect(process.env.DB_host)
+	.connect(process.env.DB_HOST)
 	.then(() => {
 		logger.info("Connected to MongoDB");
 	})

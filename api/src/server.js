@@ -20,6 +20,10 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
+app.use("/supervisor", require("./controller/supervisor/supervisor.routes"));
+app.use("/employee", require("./controller/employee/employee.routes"));
+app.use("/review", require("./controller/review/review.routes"));
+
 apiWrapper.use("/", express.static(angularAppPath));
 apiWrapper.get("*", (req, res) => {
 	res.sendFile(join(angularAppPath, "index.html"));
