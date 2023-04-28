@@ -4,6 +4,8 @@ const cors = require("cors");
 const logger = require("./config/logger");
 const { join } = require("path");
 const angularAppPath = join(__dirname, "public", "angular");
+const authenticate = require("./auth/authenticate");
+const authHandler = require("./auth/authHandler");
 
 const app = express();
 const apiWrapper = express();
@@ -20,9 +22,14 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
-app.use("/supervisor", require("./controller/supervisor/supervisor.routes"));
-app.use("/employee", require("./controller/employee/employee.routes"));
-app.use("/review", require("./controller/review/review.routes"));
+app.post("/login", authHandler.login);
+app.post("/refresh", authHandler.refresh);
+app.post("/logout", authHandler.logout);
+app.get("/me", authenticate, authHandler.me);
+
+app.use("/supervisor", authenticate, require("./controller/supervisor/supervisor.routes"));
+app.use("/employee", authenticate, require("./controller/employee/employee.routes"));
+app.use("/review", authenticate, require("./controller/review/review.routes"));
 
 apiWrapper.use("/", express.static(angularAppPath));
 apiWrapper.get("*", (req, res) => {
