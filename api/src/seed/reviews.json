@@ -1,0 +1,68 @@
+[
+    {
+        "_id": "644d167ff853ae17ecac8085",
+        "employee": "644d1658f853ae17ecac807c",
+        "timeSpan": "2023Q2",
+        "goals": [
+            {
+                "description": "goal1",
+                "priority": 1
+            },
+            {
+                "description": "goal2",
+                "priority": 1
+            },
+            {
+                "description": "goal3",
+                "priority": 1
+            },
+            {
+                "description": "goal4",
+                "priority": 1
+            },
+            {
+                "description": "goal5",
+                "priority": 2
+            },
+            {
+                "description": "goal6",
+                "priority": 2
+            },
+            {
+                "description": "goal7",
+                "priority": 1
+            },
+            {
+                "description": "goal8",
+                "priority": 1
+            },
+            {
+                "description": "goal9",
+                "priority": 3
+            }
+        ]
+    },
+    {
+        "_id": "644d16a9f853ae17ecac80a0",
+        "employee": "644d1658f853ae17ecac807c",
+        "timeSpan": "2023Q1",
+        "goals": [
+            {
+                "description": "goal1",
+                "rating": 1,
+                "priority": 1
+            },
+            {
+                "description": "goal2",
+                "rating": 1,
+                "priority": 1
+            },
+            {
+                "description": "goal3",
+                "rating": 0.8,
+                "priority": 1
+            }
+        ],
+        "finalRating": 0.93
+    }
+]

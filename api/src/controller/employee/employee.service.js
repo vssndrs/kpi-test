@@ -5,9 +5,9 @@ exports.create = (employee) => {
 	return newEmployee.save();
 };
 
-exports.findOne = (id) => Employee.findById(id).populate({ path: "supervisor", select: "name" }).populate({path: "reviews" , select: "goals finalRating"});
+exports.findOne = (id) => Employee.findById(id).populate({ path: "supervisor", select: "username" }).populate({path: "reviews" , select: "goals finalRating"});
 
-exports.find = (query) => Employee.find(query).populate({ path: "supervisor", select: "name" }).populate({path: "reviews", select: "goals finalRating"});
+exports.find = (query) => Employee.find(query).populate({ path: "supervisor", select: "username" }).populate({path: "reviews", select: "goals finalRating"});
 
 exports.update = (id, updateData) => Employee.findByIdAndUpdate(id, updateData, { new: true });
 

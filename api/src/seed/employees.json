@@ -1,0 +1,21 @@
+[
+    {
+        "_id": "644d1651f853ae17ecac8076",
+        "name": "Employee2",
+        "supervisor": "644bb8272358bb03e4662079",
+        "registrationNumber": 1234,
+        "jobTitle": "job2",
+        "reviews": []
+    },
+    {
+        "_id": "644d1658f853ae17ecac807c",
+        "name": "Employee1",
+        "supervisor": {
+            "_id": "644bb8272358bb03e4662079",
+            "username": "Supervisor1"
+        },
+        "registrationNumber": 123,
+        "jobTitle": "job1",
+        "reviews": ["644d167ff853ae17ecac8085", "644d16a9f853ae17ecac80a0"]
+    }
+]

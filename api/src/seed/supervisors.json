@@ -1,0 +1,8 @@
+[
+    {
+        "_id": "644bb8272358bb03e4662079",
+        "username": "Supervisor1",
+        "password": "pw",
+        "employees": ["644d1651f853ae17ecac8076", "644d1658f853ae17ecac807c"]
+    }
+]

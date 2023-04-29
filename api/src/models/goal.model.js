@@ -6,16 +6,7 @@ const GoalSchema = new mongoose.Schema({
 		required: true,
 	},
 	rating: {
-		type: String,
-		enum: [
-			"Kiváló",
-			"Jó",
-			"Közepes",
-			"Változó",
-			"Fejlesztendő",
-			"Erősen fejlesztendő",
-			"Kritikus",
-		],
+		type: Number,
 	},
 	priority: {
 		type: Number,

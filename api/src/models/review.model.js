@@ -16,15 +16,8 @@ const ReviewSchema = new mongoose.Schema({
 				required: true,
 			},
 			rating: {
-				type: String,
-				enum: [
-					"Kiváló",
-					"Jó",
-					"Változó",
-					"Fejlesztendő",
-					"Erősen fejlesztendő",
-					"Kritikus",
-				],
+				type: Number,
+				enum: [0, 0.2, 0.4, 0.6, 0.8, 1],
 			},
 			priority: {
 				type: Number,
