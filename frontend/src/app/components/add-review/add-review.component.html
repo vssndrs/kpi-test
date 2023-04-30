@@ -1,1 +1,52 @@
-<p>add-review works!</p>
+<main class="form-floating w-75 m-auto">
+    <form *ngIf="reviewForm" [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+        <h1>Értékelőlap</h1>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="timeSpan" placeholder="Időszak" formControlName="timeSpan">
+            <label for="timeSpan">Időszak</label>
+        </div>
+
+        <ng-container formArrayName="goals">
+            <ng-container *ngFor="let goalForm of goals.controls; let i = index">
+                <div class="row" [formGroupName]="i">
+
+                    <div class="form-floating mb-3 col-6">
+                        <input type="text" class="form-control" id="description" placeholder="Cél" formControlName="description">
+                        <label for="description">Cél</label>
+                    </div>
+
+                    <div class="form-floating mb-3 col-2">
+                        <select type="number" class="form-select" formControlName="priority" id="priority">
+                            <option *ngFor="let opt of priorityOptions" [value]=opt.value>{{opt.display}}</option>
+                        </select>
+                        <label for="priority">Prioritás</label>
+                    </div>
+
+                    <div class="form-floating mb-3 col-2">
+                        <select type="number" class="form-select" formControlName="rating" id="rating">
+                            <option *ngFor="let opt of ratingOptions" [value]=opt.value>{{opt.display}}</option>
+                        </select>
+                        <label for="rating">Értékelés</label>
+                    </div>
+
+                    <div class="col-2">
+                        <button type="button" (click)="removeGoal(i)" class="btn btn-danger w-100 h-75">Eltávolítás</button>
+                    </div>
+
+                </div>
+                </ng-container>
+        </ng-container>
+
+        <div class="form-floating mb-3">
+            <span class="text-danger" *ngIf="reviewForm.invalid">Kérjük töltsön ki minden mezőt!</span>
+            <button type="button" (click)="addGoal()" class="w-100 btn btn-primary">Cél hozzáadása</button>
+        </div>
+
+        <div class="form-floating mb-3">
+            <button [disabled]="reviewForm.invalid" class="w-100 btn btn-primary">Értékelés elküldése</button>
+        </div>
+    </form>
+</main>
+
+

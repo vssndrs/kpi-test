@@ -15,8 +15,7 @@ const routes: Routes = [
   { path: 'addemployee', component: AddEmployeeComponent, canActivate: [SupervisorGuard] },
   { path: 'employees/:id', component: EmployeeComponent, canActivate: [SupervisorGuard] },
   { path: 'reviews/:id', component: ReviewComponent, canActivate: [SupervisorGuard] },
-  // { path: 'addreview/:id', component: AddReviewComponent, canActivate: [SupervisorGuard] },
-  { path: 'addreview/:id', component: AddReviewComponent },
+  { path: 'addreview/:id', component: AddReviewComponent, canActivate: [SupervisorGuard] },
   { path: '**', redirectTo: '/login' }
 ];
 

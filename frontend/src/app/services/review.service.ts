@@ -26,7 +26,7 @@ export class ReviewService {
       );
   }
 
-  addReview(review: Review) {
+  addReview(review: any) {
     const url = `${this.BASE_URL}review`;
 
     return this.http.post(url, review)
