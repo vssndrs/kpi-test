@@ -48,7 +48,10 @@ exports.login = async (req, res, next) => {
 	res.status(200).json({
 		accessToken,
 		refreshToken,
-		supervisorId: supervisor._id,
+		supervisor: {
+			_id: supervisor._id,
+			username: supervisor.username,
+		}
 	});
 };
 
@@ -109,8 +112,7 @@ exports.me = (req, res, next) => {
 				return res
 					.status(200)
 					.json({
-						supervisorId: supervisor.supervisorId,
-						username: supervisor.username,
+						supervisor
 					});
 			}
 		}

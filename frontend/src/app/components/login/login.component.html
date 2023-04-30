@@ -1,0 +1,19 @@
+<main class="form-signin w-100 m-auto">
+    <form *ngIf="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <h1 class="h3 mb-3 mt-5 fw-normal">Kérjük jelentkezzen be!</h1>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="username" formControlName="username" placeholder="Felhasználónév">
+            <label for="username">Felhasználónév</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Jelszó">
+            <label for="password">Jelszó</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="loginForm.invalid">Belépés</button>
+
+    </form>
+</main>

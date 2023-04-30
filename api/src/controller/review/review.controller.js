@@ -3,11 +3,28 @@ const employeeService = require("../employee/employee.service");
 const logger = require("../../config/logger");
 
 exports.create = async (req, res, next) => {
+
+    // goals is an array of objects which contain description, rating (can be 0, 0.2, 0.4, 0.6, 0.8, 1) and priority (can be 1, 2 or 3)
+    // finalrating is the sum of each goal's rating multiplied by its priority, divided by the sum of all priorities
+
+    const goals = req.body.goals;
+    let countFinalRating = 0;
+    let prioritySum = 0;
+
+    for (let i = 0; i < goals.length; i++) {
+        countFinalRating += goals[i].rating * goals[i].priority;
+        prioritySum += goals[i].priority;
+    }
+
+    countFinalRating = countFinalRating / prioritySum;
+
+
+
     const newReview = {
         employee: req.body.employee,
         timeSpan: req.body.timeSpan,
         goals: req.body.goals,
-        finalRating: req.body.finalRating,
+        finalRating: countFinalRating,
     };
 
     try {
@@ -23,7 +40,7 @@ exports.create = async (req, res, next) => {
         res.status(201).json(savedReview);
     } catch (err) {
         logger.error(err);
-        return next(res.status(500).json({ message: "Error adding review" }));
+        return next(res.status(500).json({ message: err.message }));
     }
 };
 
@@ -61,6 +78,7 @@ exports.find = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     const id = req.params.id;
+
     const updateData = {
         employee: req.body.employee,
         timeSpan: req.body.timeSpan,

@@ -1,0 +1,26 @@
+<div *ngIf="employees$ | async" class="container">
+    <h1>Alkalmazottak</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Név</th>
+                        <th>Törzsszám</th>
+                        <th>Munkakör</th>
+                        <th>Értékelések</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employees$ | async">
+                        <td>{{employee.name}}</td>
+                        <td>{{employee.registrationNumber}}</td>
+                        <td>{{employee.jobTitle}}</td>
+                        <td><button class="btn btn-primary" routerLink="/employees/{{employee._id}}">Értékelések</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

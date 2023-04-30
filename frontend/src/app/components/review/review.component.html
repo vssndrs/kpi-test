@@ -1,0 +1,30 @@
+<div class="container" *ngIf="(review$ | async) as review">
+
+    <h1>{{review.employee.name}} - {{review.timeSpan}}</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cél</th>
+                        <th>Prioritás</th>
+                        <th>Eredmény</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let goal of review.goals">
+                        <td>{{goal.description}}</td>
+                        <td>{{goal.priority}}</td>
+                        <td>{{translateRating(goal.rating)}}</td>
+                    </tr>
+                    <tr class="fw-bold">
+                        <td colspan="2">Végeredmény</td>
+                        <td>{{review.finalRating | percent}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

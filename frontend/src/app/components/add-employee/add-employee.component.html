@@ -1,0 +1,24 @@
+<main class="form-floating w-75 m-auto">
+    <form *ngIf="employeeForm" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <h1>Munkavállaló adatok</h1>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="name" placeholder="Név" formControlName="name">
+            <label for="name">Név</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="registrationNumber" placeholder="Törzsszám" formControlName="registrationNumber">
+            <label for="registrationNumber">Törzsszám</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="jobTitle" placeholder="Munkakör" formControlName="jobTitle">
+            <label for="jobTitle">Munkakör</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <button type="submit" class="w-100 btn btn-primary">Munkavállaló hozzáadása</button>
+        </div>
+    </form>
+</main>

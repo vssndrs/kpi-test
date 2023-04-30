@@ -1,0 +1,30 @@
+<div class="container" *ngIf="(employee$ | async) as employee">
+    <h1>Név: {{employee.name}} - Törzsszám: {{employee.registrationNumber}}</h1>
+    <h3>Értékelések</h3>
+    <div>
+        <button class="btn btn-primary" routerLink="/addreview/{{employee._id}}">Értékelés hozzáadása</button>
+    </div>
+    <div *ngIf="employee.reviews.length > 0" class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Időszak</th>
+                        <th>Eredmény</th>
+                        <th>Részletek</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let review of employee.reviews">
+                        <td>{{review.timeSpan}}</td>
+                        <td>{{review.finalRating | percent}}</td>
+                        <td><button class="btn btn-primary" routerLink="/reviews/{{review._id}}">Részletek</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="employee.reviews.length === 0">
+        <h4>Még nincs értékelés</h4>
+    </div>
+</div>
