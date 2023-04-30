@@ -15,7 +15,7 @@
                 <tbody>
                     <tr *ngFor="let goal of review.goals">
                         <td>{{goal.description}}</td>
-                        <td>{{goal.priority}}</td>
+                        <td>{{translatePriority(goal.priority)}}</td>
                         <td>{{translateRating(goal.rating)}}</td>
                     </tr>
                     <tr class="fw-bold">

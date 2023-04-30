@@ -34,18 +34,18 @@ const ReviewSchema = new mongoose.Schema({
 
 ReviewSchema.path("goals").validate(function (goals) {
 	if (goals.length < 3) {
-		throw new Error("There must be at least 3 goals");
+		throw new Error("Legalább 3 cél megadása szükséges!");
 	} else if (goals.length > 10) {
-		throw new Error("There must be at most 10 goals");
+		throw new Error("Legfeljebb 10 cél adható meg!");
 	} else {
 		let priority1 = 0;
 		let priority2 = 0;
 		let priority3 = 0;
 		for (let i = 0; i < goals.length; i++) {
 			if (!goals[i].description) {
-				throw new Error("Each goal must have a description");
+				throw new Error("Mindegyik célhoz meg kell adni a leírást!");
 			} else if (!goals[i].priority) {
-				throw new Error("Each goal must have a priority");
+				throw new Error("Mindegyik célhoz meg kell adni a prioritást!");
 			} else if (goals[i].priority === 1) {
 				priority1++;
 			} else if (goals[i].priority === 2) {
@@ -56,11 +56,11 @@ ReviewSchema.path("goals").validate(function (goals) {
 		}
 		if (priority3 > goals.length * 0.25) {
 			throw new Error(
-				"Goals with priority 3 must not be more than 25% of total goals"
+				"A magas prioritású célok száma nem haladhatja meg az összes cél 25%-át!"
 			);
 		} else if (priority2 > goals.length * 0.3) {
 			throw new Error(
-				"Goals with priority 2 must not be more than 30% of total goals"
+				"A közepes prioritású célok száma nem haladhatja meg az összes cél 30%-át!"
 			);
 		}
 	}

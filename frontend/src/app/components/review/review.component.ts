@@ -34,6 +34,19 @@ export class ReviewComponent implements OnInit {
     }
   }
 
+  translatePriority(priority: number) {
+    switch (priority) {
+      case 1:
+        return 'Alacsony';
+      case 2:
+        return 'Közepes';
+      case 3:
+        return 'Magas';
+      default:
+        return 'Nem értékelt';
+    }
+  }
+
   constructor(
     private reviewService: ReviewService,
     private router: Router,

@@ -5,17 +5,17 @@
         "timeSpan": "2023Q1",
         "goals": [
             {
-                "description": "goal1",
+                "description": "Első cél",
                 "rating": 1,
                 "priority": 1
             },
             {
-                "description": "goal2",
+                "description": "Második cél",
                 "rating": 1,
                 "priority": 1
             },
             {
-                "description": "goal3",
+                "description": "Harmadik cél",
                 "rating": 0.8,
                 "priority": 1
             }

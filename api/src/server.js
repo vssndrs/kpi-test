@@ -37,8 +37,8 @@ apiWrapper.get("*", (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-	logger.error(`ERROR ${err.statusCode}: ${err.message}`);
-	res.status(err.statusCode);
+	logger.error(`ERROR: ${err.statusCode}  ${err.message}`);
+	res.status(err.statusCode)
 	res.json({
 		hasError: true,
 		message: err.message,

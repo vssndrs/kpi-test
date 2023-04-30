@@ -31,7 +31,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         } else if (err.status === 403) {
           return this.handle403Error(request, next)
         } else {
-          return throwError(() => new Error('Something went wrong'))
+          return throwError(() => err || new Error('Server error'))
         }
       }));
   }

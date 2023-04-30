@@ -1,11 +1,9 @@
 const reviewService = require("./review.service");
 const employeeService = require("../employee/employee.service");
 const logger = require("../../config/logger");
+const createError = require("http-errors");
 
 exports.create = async (req, res, next) => {
-
-    // goals is an array of objects which contain description, rating (can be 0, 0.2, 0.4, 0.6, 0.8, 1) and priority (can be 1, 2 or 3)
-    // finalrating is the sum of each goal's rating multiplied by its priority, divided by the sum of all priorities
 
     const goals = req.body.goals;
     let countFinalRating = 0;
@@ -40,7 +38,9 @@ exports.create = async (req, res, next) => {
         res.status(201).json(savedReview);
     } catch (err) {
         logger.error(err);
-        return next(res.status(500).json({ message: err.message }));
+        return next(
+            new createError.InternalServerError(err.message || "Error creating review")
+        );
     }
 };
 

@@ -14,6 +14,8 @@ export class AddReviewComponent implements OnInit {
   priorityOptions = [{ value: 1, display: 'Alacsony' }, { value: 2, display: 'Közepes' }, { value: 3, display: 'Magas' }];
   employeeId!: string;
 
+  errorMessage?: string = '';
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private reviewService: ReviewService,
@@ -50,7 +52,7 @@ export class AddReviewComponent implements OnInit {
     if (goalArray.length < 10) {
       goalArray.push(this.fb.group({
         description: ['', Validators.required],
-        priority: [0, [Validators.required, Validators.min(1), Validators.max(3)]],
+        priority: [1, [Validators.required, Validators.min(1), Validators.max(3)]],
         rating: [0, [Validators.required, Validators.min(0), Validators.max(1)]],
       }));
     } else {
@@ -83,10 +85,10 @@ export class AddReviewComponent implements OnInit {
         next: () => {
           alert('Sikeres mentés!');
           this.reviewForm.reset();
+          this.errorMessage = '';
         },
         error: (err) => {
-          console.log(err.message);
-          alert('Hiba történt a mentés során!');
+          this.errorMessage = err.error.message.replace('Review validation failed: goals: ', '');
         },
       });
     }
