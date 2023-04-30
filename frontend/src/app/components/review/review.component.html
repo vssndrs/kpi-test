@@ -1,5 +1,7 @@
 <div class="container" *ngIf="(review$ | async) as review">
 
+    <button class="btn btn-primary" routerLink="/employees/{{review.employee._id}}">Vissza</button>
+
     <h1>{{review.employee.name}} - {{review.timeSpan}}</h1>
 
     <div class="row">
