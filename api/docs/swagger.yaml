@@ -1,0 +1,584 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: KPI API
+  description: KPi értékelő rendszert kiszolgáló API
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /login:
+    post:
+      summary: Bejelentkezés
+      tags:
+        - login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: A bejelentkezés sikeres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: A bejelentkezés sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /supervisor:
+    get:
+      summary: Vezetők lekérdezése
+      tags:
+        - supervisor
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: A vezető adatai
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supervisor'
+        "500":
+          description: A vezető adatainak lekérdezése sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    post:
+      summary: Vezető létrehozása
+      tags:
+        - supervisor
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: A vezető létrehozása sikeres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: A vezető létrehozása sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /supervisor/{id}:
+    get:
+      summary: Vezető lekérdezése
+      tags:
+        - supervisor
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A vezető adatai
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supervisor'
+        '500':
+          description: A vezető adatainak lekérdezése sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      summary: Vezető módosítása
+      tags:
+        - supervisor
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supervisor'
+      responses:
+        '200':
+          description: A vezető módosítása sikeres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: A vezető módosítása sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    delete:
+      summary: Vezető törlése
+      tags:
+        - supervisor
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A vezető törlése sikeres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: A vezető törlése sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /employee:
+    get:
+      summary: Dolgozók lekérdezése
+      tags:
+        - employee
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: A dolgozók adatai
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+        '500':
+          description: A dolgozók adatainak lekérdezése sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    post:
+      summary: Dolgozó létrehozása
+      tags:
+        - employee
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                supervisor:
+                  $ref: '#/components/schemas/Supervisor'
+                registrationNumber:
+                  type: number
+                jobTitle:
+                  type: string
+                reviews:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Review'
+      responses:
+        '200':
+          description: A dolgozó létrehozása sikeres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: A dolgozó létrehozása sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /employee/{id}:
+    get:
+      summary: Dolgozó lekérdezése
+      tags:
+        - employee
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A dolgozó adatai
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '500':
+          description: A dolgozó adatainak lekérdezése sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      summary: Dolgozó módosítása
+      tags:
+        - employee
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      responses:
+        '200':
+          description: A dolgozó módosítása sikeres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: A dolgozó módosítása sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    delete:
+      summary: Dolgozó törlése
+      tags:
+        - employee
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A dolgozó törlése sikeres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: A dolgozó törlése sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /review:
+    get:
+      summary: Értékelések lekérdezése
+      tags:
+        - review
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Az értékelések adatai
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        '500':
+          description: Az értékelések adatainak lekérdezése sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    post:
+      summary: Értékelés létrehozása
+      tags:
+        - review
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                employee:
+                  $ref: '#/components/schemas/Employee'
+                timeSpan:
+                  type: string
+                finalRating:
+                  type: number
+                goals:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                      priority:
+                        type: number
+                      rating:
+                        type: number
+      responses:
+        '200':
+          description: Az értékelés létrehozása sikeres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Az értékelés létrehozása sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /review/{id}:
+    get:
+      summary: Értékelés lekérdezése
+      tags:
+        - review
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Az értékelés adatai
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '500':
+          description: Az értékelés adatainak lekérdezése sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      summary: Értékelés módosítása
+      tags:
+        - review
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+      responses:
+        '200':
+          description: Az értékelés módosítása sikeres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Az értékelés módosítása sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    delete:
+      summary: Értékelés törlése
+      tags:
+        - review
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Az értékelés törlése sikeres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Az értékelés törlése sikertelen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    Employee:
+      type: object
+      properties:
+        name:
+          type: string
+        supervisor:
+          $ref: '#/components/schemas/Supervisor'
+        registrationNumber:
+          type: number
+        jobTitle:
+          type: string
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+    Review:
+      type: object
+      properties:
+        employee:
+          $ref: '#/components/schemas/Employee'
+        timeSpan:
+          type: string
+        finalRating:
+          type: number
+        goals:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+              priority:
+                type: number
+              rating:
+                type: number
+    Supervisor:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        employees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

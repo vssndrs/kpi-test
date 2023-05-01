@@ -18,7 +18,9 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.5",
     "morgan": "^1.10.0",
-    "winston": "^3.8.2"
+    "swagger-ui-express": "^4.6.2",
+    "winston": "^3.8.2",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
