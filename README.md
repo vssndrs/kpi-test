@@ -13,7 +13,11 @@ Az alkalmazás egy egyszerű teljesítményértékelő rendszer, amelyben az ér
 # Indítás
 
 Az alkalmazás indításához nodejs futtatókörnyezet, valamint MongoDB adatbázis szükséges. A MongoDB adatbázisnak el kell indulnia a backend indítása előtt. Az alkalmazás kiszolgálja a frontendet is, így a frontend indítása nem szükséges.
-Az alkalmazás elindítása a következő paranccsal történik:
+Az alkalmazás elindítása előtt az "api" mappában a következő parancs kiadása szükséges:
+
+```npm install```
+
+Az alkalmazás elindítása ugyanebben a mappában állva következő paranccsal történik:
 
 ```npm run start```
 
